@@ -5,7 +5,6 @@ defmodule TDLib.Backend do
   use GenServer
 
   @moduledoc false
-  @binary TDLib.get_backend_binary()
   @port_opts [:binary, :line]
 
   # Internal state
@@ -23,7 +22,7 @@ defmodule TDLib.Backend do
     state = %Backend{
       name: name,
       buffer: "",
-      port: Port.open({:spawn_executable, @binary}, @port_opts)
+      port: Port.open({:spawn_executable, TDLib.get_backend_binary()}, @port_opts)
     }
 
     {:ok, state}
